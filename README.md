@@ -2,26 +2,6 @@
 
 A complete machine learning project with backend API and frontend UI for predicting job applicant selection based on company, job title, education, experience, and skills.
 
-## 📁 Project Structure
-
-```
-ML-Applicant-Predictor/
-├── api/
-│   └── api.py              # FastAPI backend server
-├── frontend/
-│   └── index.html          # Frontend UI (HTML/JS)
-├── models/
-│   └── model.pkl           # Trained ML model (generate from notebook)
-├── data/
-│   ├── raw/                # Original dataset
-│   └── processed/          # Processed data
-├── notebooks/
-│   └── project.ipynb       # Jupyter notebook for training
-├── requirements.txt        # Python dependencies
-├── .gitignore             # Git ignore file
-└── README.md              # This file
-```
-
 ## 🚀 Quick Start
 
 ### Step 1: Install Dependencies

@@ -2,32 +2,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Contact form submission
     const contactForm = document.getElementById('contact-form');
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Define handleSubmit first
+    function handleSubmit(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Disable button and show loading state
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        // In a real application, you would send the form data to a server here
+        // For now, we'll simulate a successful submission
+        setTimeout(() => {
+            // Check if success message already exists
+            let successMessage = contactForm.nextElementSibling;
             
-            // Get form data
-            const formData = new FormData(contactForm);
-            const formObject = {};
-            formData.forEach((value, key) => {
-                formObject[key] = value;
-            });
-            
-            // Show success message
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-            
-            // Simulate form submission
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Reset form
-                contactForm.reset();
-                
-                // Show success message
-                const successMessage = document.createElement('div');
+            if (!successMessage || !successMessage.classList.contains('success-message')) {
+                // Create success message
+                successMessage = document.createElement('div');
                 successMessage.className = 'success-message';
                 successMessage.innerHTML = `
                     <div class="success-icon">
@@ -37,28 +33,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>Thank you for contacting us. We'll get back to you soon.</p>
                 `;
                 
-                // Insert success message before the form
-                contactForm.parentNode.insertBefore(successMessage, contactForm);
+                // Insert success message after the form
+                contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
                 
                 // Hide form
                 contactForm.style.display = 'none';
-                
-                // Reset button state
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-                
-                // Remove success message after 5 seconds
+            }
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
                 setTimeout(() => {
-                    successMessage.style.opacity = '0';
-                    setTimeout(() => {
-                        successMessage.remove();
-                        contactForm.style.display = 'block';
-                    }, 300);
-                }, 5000);
-            }, 1500);
-        });
+                    successMessage.remove();
+                    contactForm.style.display = 'block';
+                }, 300);
+            }, 5000);
+        }, 1500);
+    };
+
+
+    // Add event listener after function is defined
+    if (contactForm) {
+        contactForm.removeEventListener('submit', handleSubmit);
+        contactForm.addEventListener('submit', handleSubmit);
     }
-    
+
     // FAQ Toggle
     const faqItems = document.querySelectorAll('.faq-item');
     
