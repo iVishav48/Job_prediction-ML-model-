@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Prediction - Model</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/model.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.21/dist/lenis.min.js"></script>
+</head>
+<body>
+    <!-- Header & Navbar -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">JobPred</a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="#" class="active">Model</a>
+                    <a href="contact.html">Contact</a>
+                    <button id="theme-toggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Model Section -->
+    <section class="model-section">
+        <div class="container">
+            <h1>Job Prediction Model</h1>
+            <div class="model-intro">
+                <p>Our advanced machine learning model analyzes your skills, experience, and preferences to predict the most suitable job roles for you. Simply fill out the form below and let our AI do the rest!</p>
+            </div>
+            
+            <div class="model-container">
+                <div class="model-form">
+                    <h2>Enter Your Details</h2>
+                    <form id="prediction-form">
+                        <div class="form-group">
+                            <label for="education">Highest Education Level</label>
+                            <select id="education" name="education" required>
+                                <option value="">Select Education Level</option>
+                                <option value="high_school">High School</option>
+                                <option value="bachelors">Bachelor's Degree</option>
+                                <option value="masters">Master's Degree</option>
+                                <option value="phd">PhD</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience">Years of Experience</label>
+                            <input type="number" id="experience" name="experience" min="0" max="50" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Skills (Select all that apply)</label>
+                            <div class="skills-checkbox">
+                                <label><input type="checkbox" name="skills" value="programming"> Programming</label>
+                                <label><input type="checkbox" name="skills" value="data_analysis"> Data Analysis</label>
+                                <label><input type="checkbox" name="skills" value="machine_learning"> Machine Learning</label>
+                                <label><input type="checkbox" name="skills" value="web_development"> Web Development</label>
+                                <label><input type="checkbox" name="skills" value="cloud_computing"> Cloud Computing</label>
+                                <label><input type="checkbox" name="skills" value="cybersecurity"> Cybersecurity</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">Primary Interest</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select Primary Interest</option>
+                                <option value="development">Software Development</option>
+                                <option value="data_science">Data Science</option>
+                                <option value="ai">Artificial Intelligence</option>
+                                <option value="cloud">Cloud Computing</option>
+                                <option value="security">Cybersecurity</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Predict Job Role</button>
+                    </form>
+                </div>
+                
+                <div class="prediction-result" id="prediction-result">
+                    <div class="result-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Your Prediction Results</h3>
+                        <p>Fill out the form and click "Predict Job Role" to see your personalized job recommendations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="model-info">
+                <h2>How It Works</h2>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Data Collection</h3>
+                        <p>Our model analyzes thousands of job postings and career paths to understand the current market trends.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                        <p>Advanced algorithms process your input data to match your profile with the most suitable job roles.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Personalized Results</h3>
+                        <p>Get detailed insights and recommendations tailored specifically to your skills and interests.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JobPred</h3>
+                    <p>Predicting your future career path with AI.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Model</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 JobPred. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/model.js"></script>
+</body>
+</html>
