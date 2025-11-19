@@ -11,14 +11,10 @@ const submitBtn = document.getElementById('submitBtn');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Hide previous results and errors
+    // Hide previous results
     result.classList.remove('show', 'success', 'error');
-    document.querySelectorAll('.error-message').forEach(el => {
-        el.classList.remove('show');
-        el.textContent = '';
-    });
 
-    // Get form values
+    // Get form values - matching exact API field names
     const formData = {
         Companies: document.getElementById('companies').value,
         Job_Title: document.getElementById('jobTitle').value,
@@ -44,23 +40,40 @@ form.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
+            mode: 'cors'
         });
 
-        const data = await response.json();
-
+        // Check if response is ok first
         if (!response.ok) {
-            throw new Error(data.detail || 'Prediction failed');
+            let errorMessage = 'Prediction failed';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.detail || errorData.message || errorMessage;
+            } catch (e) {
+                errorMessage = `Server error: ${response.status} ${response.statusText}`;
+            }
+            throw new Error(errorMessage);
         }
 
-        // Display result with animation
-        setTimeout(() => {
-            displayResult(data);
-        }, 300);
+        // Parse JSON only if response is ok
+        const data = await response.json();
+
+        // Display result
+        displayResult(data);
 
     } catch (error) {
         console.error('Error:', error);
-        showError(error.message || 'Failed to connect to API. Make sure the backend is running on http://localhost:8000');
+        
+        // Handle network errors specifically
+        let errorMessage = 'Failed to connect to API';
+        if (error.name === 'TypeError' && (error.message.includes('fetch') || error.message.includes('Failed to fetch'))) {
+            errorMessage = 'Cannot connect to API. Please ensure the backend server is running on http://localhost:8000';
+        } else if (error.message) {
+            errorMessage = error.message;
+        }
+        
+        showError(errorMessage);
     } finally {
         loading.classList.remove('show');
         submitBtn.disabled = false;
@@ -68,15 +81,14 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-// Display prediction result
+// Display prediction result - only show what API returns
 function displayResult(data) {
-    const resultTitle = document.getElementById('resultTitle');
     const resultMessage = document.getElementById('resultMessage');
     const resultProbability = document.getElementById('resultProbability');
     const resultIcon = document.getElementById('resultIcon');
 
-    resultTitle.textContent = 'Prediction Result';
-    resultMessage.textContent = data.message || (data.prediction === 1 ? '✅ Likely to be Selected' : '❌ Unlikely to be Selected');
+    // Show message from API (already formatted)
+    resultMessage.textContent = data.message;
     
     // Set icon based on prediction
     if (data.prediction === 1) {
@@ -85,6 +97,7 @@ function displayResult(data) {
         resultIcon.innerHTML = '<svg class="result-icon error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>';
     }
     
+    // Show probability only if available
     if (data.probability !== null && data.probability !== undefined) {
         const percentage = (data.probability * 100).toFixed(1);
         resultProbability.innerHTML = `
@@ -98,40 +111,14 @@ function displayResult(data) {
     }
 
     result.classList.add('show', data.prediction === 1 ? 'success' : 'error');
-    
-    // Add confetti effect for success
-    if (data.prediction === 1) {
-        createConfetti();
-    }
 }
 
 // Show error message
 function showError(message) {
     result.classList.add('show', 'error');
-    document.getElementById('resultTitle').textContent = 'Error';
     document.getElementById('resultMessage').textContent = message;
     document.getElementById('resultProbability').innerHTML = '';
     document.getElementById('resultIcon').innerHTML = '<svg class="result-icon error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
-}
-
-// Create confetti effect for success
-function createConfetti() {
-    const colors = ['#00ff88', '#00d4ff', '#ff6b6b', '#ffd93d', '#6bcf7f'];
-    const confettiCount = 50;
-    
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
-        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(confetti);
-        
-        setTimeout(() => {
-            confetti.remove();
-        }, 5000);
-    }
 }
 
 // Add input focus animations
@@ -144,4 +131,3 @@ document.querySelectorAll('input, select').forEach(input => {
         this.parentElement.classList.remove('focused');
     });
 });
-

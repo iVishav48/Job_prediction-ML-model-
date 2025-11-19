@@ -332,6 +332,7 @@
             width: 32px;
             height: 32px;
             stroke-width: 2.5;
+            flex-shrink: 0;
         }
 
         .result-icon.success-icon {
@@ -342,16 +343,11 @@
             color: var(--accent-danger);
         }
 
-        .result-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
         .result-message {
             font-size: 1.15em;
-            margin: 12px 0;
+            margin: 0;
             font-weight: 500;
+            flex: 1;
         }
 
         .result-probability {
@@ -426,23 +422,6 @@
             75% { transform: translateX(5px); }
         }
 
-        /* Confetti animation */
-        .confetti {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            top: -10px;
-            border-radius: 2px;
-            animation: confettiFall linear forwards;
-            z-index: 1000;
-        }
-
-        @keyframes confettiFall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
 
         /* Responsive design */
         @media (max-width: 640px) {
@@ -579,9 +558,8 @@
         <div class="result" id="result">
             <div class="result-header">
                 <div id="resultIcon"></div>
-                <div class="result-title" id="resultTitle"></div>
+                <div class="result-message" id="resultMessage"></div>
             </div>
-            <div class="result-message" id="resultMessage"></div>
             <div class="result-probability" id="resultProbability"></div>
         </div>
     </div>
