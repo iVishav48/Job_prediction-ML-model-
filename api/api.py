@@ -101,6 +101,35 @@ async def health_check():
         "model_loaded": model is not None
     }
 
+@app.get("/model/info")
+async def model_info():
+    """Get model information"""
+    if model is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+    
+    return {
+        "model_type": "Random Forest Classifier",
+        "preprocessing": {
+            "categorical": "OneHotEncoder",
+            "numerical": "StandardScaler"
+        },
+        "features": [
+            "Companies",
+            "Job_Title",
+            "Educational Degree",
+            "Experience_Years",
+            "Number of Skills"
+        ],
+        "metrics": {
+            "accuracy": 0.903,
+            "precision": 0.90,
+            "recall": 0.90,
+            "f1_score": 0.90
+        },
+        "training_samples": 1500,
+        "model_loaded": True
+    }
+
 @app.post("/predict")
 async def predict(request: PredictionRequest):
     """
