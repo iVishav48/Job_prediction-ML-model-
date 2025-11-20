@@ -120,7 +120,7 @@ _ml/
 └── requirements.txt
 ```
 
-## 🎯 API Endpoints
+## API Endpoints
 
 ### POST `/predict`
 Make a prediction with applicant data.

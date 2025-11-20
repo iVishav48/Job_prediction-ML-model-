@@ -9,17 +9,14 @@ export default function Home() {
     {
       title: 'Data Collection',
       description: 'Comprehensive dataset with 1500+ applicant records across multiple companies and job roles.',
-      icon: '📊',
     },
     {
       title: 'ML Model',
       description: 'Random Forest classifier with 90.3% accuracy, trained on real-world hiring data.',
-      icon: '🤖',
     },
     {
       title: 'Live Prediction',
       description: 'Get instant predictions with confidence scores. Try it now with our interactive predictor.',
-      icon: '⚡',
     },
   ]
 
@@ -56,10 +53,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 md:py-32">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto"
+          transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
+          className="text-center max-w-4xl mx-auto relative z-10"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="gradient-text">Applicant Selection Predictor</span>
@@ -73,44 +70,50 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/model"
-              className="px-8 py-3 bg-electric hover:bg-blue-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 button-press"
+              className="px-8 py-3 bg-electric hover:bg-blue-600 text-white rounded-lg font-semibold transition-all duration-120 ease-snap transform hover:scale-105 button-press glow-pulse"
             >
               Try the Model
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-3 border-2 border-electric text-electric hover:bg-electric/10 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 button-press"
+              className="px-8 py-3 border-2 border-electric text-electric hover:bg-electric/10 rounded-lg font-semibold transition-all duration-120 ease-snap transform hover:scale-105 button-press"
             >
               Contact Us
             </Link>
           </div>
         </motion.div>
+      </section>
 
-        {/* Visual Placeholder */}
+      {/* Hero Image Section */}
+      <section className="container mx-auto px-4 py-12 relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 max-w-4xl mx-auto"
+          transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
+          className="max-w-5xl mx-auto"
         >
-          <div className="bg-gradient-to-br from-electric/20 to-blue-600/20 rounded-2xl p-8 border border-electric/30">
-            <div className="grid grid-cols-3 gap-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-charcoal/50 rounded-lg p-4 border border-electric/20">
-                  <div className="h-32 bg-gradient-to-br from-electric/30 to-blue-600/30 rounded"></div>
-                </div>
-              ))}
+          <div className="relative rounded-2xl overflow-hidden border border-electric/20 bg-charcoal/60 backdrop-blur-sm">
+            <img 
+              src="/pic/business-people-marketing-strategy-analysis-concept-male-hands-typing-laptop-concept-young-people-work-mobile-devices-158619933.webp"
+              alt="Professional team working on data analysis"
+              className="w-full h-[400px] object-cover opacity-80 gpu-accelerated"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent" />
+            <div className="absolute bottom-8 left-8 right-8 text-center">
+              <h3 className="text-2xl font-bold text-offwhite mb-2">AI-Powered Hiring Intelligence</h3>
+              <p className="text-steel">Transform your recruitment process with machine learning</p>
             </div>
           </div>
         </motion.div>
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-20 relative z-10">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
           className="text-3xl md:text-4xl font-bold text-center mb-12"
         >
           How It Works
@@ -119,13 +122,12 @@ export default function Home() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 6 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-charcoal/50 border border-electric/20 rounded-xl p-6 hover:border-electric/40 transition-all duration-300"
+              transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1], delay: index * 0.05 }}
+              className="bg-charcoal/60 backdrop-blur-sm border border-electric/20 rounded-xl p-6 hover:border-electric/40 transition-all duration-120 ease-snap hover:scale-105 active:scale-95"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-electric">{feature.title}</h3>
               <p className="text-steel">{feature.description}</p>
             </motion.div>
@@ -141,9 +143,10 @@ export default function Home() {
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-electric mb-2">{stat.value}</div>
@@ -160,6 +163,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
           className="text-3xl md:text-4xl font-bold text-center mb-4"
         >
           About Us

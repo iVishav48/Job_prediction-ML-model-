@@ -10,9 +10,6 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-electric to-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-2xl">🎯</span>
-              </div>
               <span className="text-xl font-bold gradient-text">JobPredictor</span>
             </div>
             <p className="text-steel text-sm max-w-md">
@@ -26,17 +23,17 @@ export default function Footer() {
             <h3 className="text-electric font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-steel hover:text-electric transition-colors text-sm">
+                <Link href="/" className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/model" className="text-steel hover:text-electric transition-colors text-sm">
+                <Link href="/model" className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95">
                   Predict
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-steel hover:text-electric transition-colors text-sm">
+                <Link href="/contact" className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95">
                   Contact
                 </Link>
               </li>
@@ -52,7 +49,7 @@ export default function Footer() {
                   href="https://github.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-steel hover:text-electric transition-colors text-sm"
+                  className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95"
                 >
                   GitHub
                 </a>
@@ -60,7 +57,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-steel hover:text-electric transition-colors text-sm"
+                  className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95"
                 >
                   Documentation
                 </a>
