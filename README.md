@@ -2,26 +2,6 @@
 
 A complete machine learning project with backend API and frontend UI for predicting job applicant selection based on company, job title, education, experience, and skills.
 
-## 📁 Project Structure
-
-```
-ML-Applicant-Predictor/
-├── api/
-│   └── api.py              # FastAPI backend server
-├── frontend/
-│   └── index.html          # Frontend UI (HTML/JS)
-├── models/
-│   └── model.pkl           # Trained ML model (generate from notebook)
-├── data/
-│   ├── raw/                # Original dataset
-│   └── processed/          # Processed data
-├── notebooks/
-│   └── project.ipynb       # Jupyter notebook for training
-├── requirements.txt        # Python dependencies
-├── .gitignore             # Git ignore file
-└── README.md              # This file
-```
-
 ## 🚀 Quick Start
 
 ### Step 1: Install Dependencies
@@ -156,40 +136,6 @@ The API expects a scikit-learn pipeline/model that:
 - Has a `.predict()` method
 - Optionally has a `.predict_proba()` method for probability scores
 
-### Column Names
-
-**Important:** The model pipeline expects these exact column names:
-- `Companies` (string)
-- `Job_Title` (string)
-- `Educational Degree` (string) - note the space
-- `Experience_Years` (float)
-- `Number of Skills` (int) - note the space
-
-The API automatically converts underscore-separated field names to space-separated column names.
-
-## 📝 Development
-
-### Running in Development Mode
-
-Backend with auto-reload:
-```bash
-uvicorn api.api:app --reload
-```
-
-### Testing the API
-
-Using curl:
-```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Companies": "Google",
-    "Job_Title": "Software Developer",
-    "Educational_Degree": "B.Tech",
-    "Experience_Years": 5.0,
-    "Number_of_Skills": 4
-  }'
-```
 
 Or use the interactive API docs at `http://localhost:8000/docs`
 
@@ -204,23 +150,3 @@ Or use the interactive API docs at `http://localhost:8000/docs`
 
 See `requirements.txt` for complete list with versions.
 
-## 🐛 Troubleshooting
-
-### Model not found error
-- Make sure you've saved your model to `models/model.pkl`
-- Check that the file path is correct
-
-### CORS errors
-- The API has CORS enabled for all origins
-- If issues persist, check that the backend is running on port 8000
-
-### Port already in use
-- Change the port in `api/api.py` or use:
-```bash
-uvicorn api.api:app --port 8001
-```
-- Update the API_URL in `frontend/index.html` accordingly
-
-## 📄 License
-
-This project is open source and available for personal and educational use.
