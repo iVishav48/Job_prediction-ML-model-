@@ -54,7 +54,7 @@ export default function ImageGallery({
             className="group cursor-pointer"
             onClick={() => openLightbox(image)}
           >
-            <div className="relative overflow-hidden rounded-xl border border-electric/20 bg-charcoal/60 backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-xl border border-electric/40 bg-charcoal/60 backdrop-blur-sm">
               <AnimatedImage
                 src={image.src}
                 alt={image.alt}

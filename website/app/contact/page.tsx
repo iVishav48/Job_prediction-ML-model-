@@ -89,7 +89,7 @@ export default function ContactPage() {
                 <p className="text-steel">We'll get back to you soon.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-charcoal/50 border border-electric/20 rounded-xl p-6 space-y-6">
+              <form onSubmit={handleSubmit} className="bg-charcoal/50 border border-electric/40 rounded-xl p-6 space-y-6">
               <div>
                 <label htmlFor="name" className="block text-steel mb-2 font-medium">
                   Name
@@ -100,7 +100,7 @@ export default function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-charcoal border border-electric/20 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
+                  className="w-full bg-charcoal border border-electric/40 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
                   placeholder="Your name"
                 />
               </div>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full bg-charcoal border border-electric/20 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
+                  className="w-full bg-charcoal border border-electric/40 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
                   placeholder="your.email@example.com"
                 />
                 <ValidationError 
@@ -138,7 +138,7 @@ export default function ContactPage() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full bg-charcoal border border-electric/20 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
+                  className="w-full bg-charcoal border border-electric/40 rounded-lg px-4 py-3 text-offwhite focus:outline-none focus:border-electric"
                   placeholder="Message subject"
                 />
               </div>
@@ -179,16 +179,16 @@ export default function ContactPage() {
           {/* Team Info */}
           <div className="max-w-4xl mx-auto">
             <motion.div 
-              className="bg-charcoal/60 backdrop-blur-sm border border-electric/20 rounded-xl p-6 relative overflow-hidden group cursor-pointer"
+              className="bg-charcoal/60 backdrop-blur-sm border border-electric/40 rounded-xl p-6 relative overflow-hidden group cursor-pointer"
               whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(59, 130, 246, 0.2)' }}
               transition={{ duration: 0.3, ease: [0.2, 0.9, 0.2, 1] }}
             >
               <motion.img 
-                src="/pic/new-staff-candidate-job-interview-corporate-business-manager-office-recruitment-process-concept-149787994.webp"
+                src="/pic/the-value-of-teamwork-in-the-workplace-blog-RH-05-23-24.webp"
                 alt="Team collaboration"
-                className="absolute inset-0 object-cover opacity-10 gpu-accelerated transition-all duration-700 group-hover:opacity-20 group-hover:scale-110"
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.05 }}
+                className="absolute inset-0 object-cover object-[30%_60%] opacity-10 gpu-accelerated transition-all duration-700 group-hover:opacity-20 group-hover:scale-110"
+                initial={{ scale: 1.1 }}
+                whileHover={{ scale: 1.15 }}
                 transition={{ duration: 0.7, ease: [0.2, 0.9, 0.2, 1] }}
               />
               
@@ -241,7 +241,7 @@ export default function ContactPage() {
                   {teamMembers.map((member, index) => (
                     <motion.div 
                       key={member.name} 
-                      className="border-b border-electric/20 pb-4 last:border-0 group/member hover:bg-electric/5 -mx-2 px-2 rounded-lg transition-all duration-300"
+                      className="border-b border-electric/40 pb-4 last:border-0 group/member hover:bg-electric/5 -mx-2 px-2 rounded-lg transition-all duration-300"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}

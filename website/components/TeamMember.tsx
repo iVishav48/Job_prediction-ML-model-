@@ -19,7 +19,7 @@ export default function TeamMember({ member, index }: TeamMemberProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1], delay: index * 0.05 }}
-      className="bg-charcoal/60 backdrop-blur-sm border border-electric/20 rounded-xl p-6 text-center hover:border-electric/40 transition-all duration-120 ease-snap hover:scale-105 active:scale-95"
+      className="bg-charcoal/60 backdrop-blur-sm border border-electric/40 rounded-xl p-6 text-center hover:border-electric/60 transition-all duration-120 ease-snap hover:scale-105 active:scale-95"
     >
       <h3 className="text-xl font-semibold mb-1 text-electric">{member.name}</h3>
       <p className="text-steel mb-4">{member.role}</p>

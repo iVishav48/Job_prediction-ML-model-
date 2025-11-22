@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-charcoal border-t border-electric/20 mt-20">
+    <footer className="bg-charcoal border-t border-electric/40 mt-20">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
@@ -42,7 +42,7 @@ export default function Footer() {
 
           {/* Resources */}
          </div>
-        <div className="border-t border-electric/20 mt-8 pt-8 text-center text-steel text-sm">
+        <div className="border-t border-electric/40 mt-8 pt-8 text-center text-steel text-sm">
           <p>&copy; {currentYear} JobPredictor. All rights reserved.</p>
         </div>
       </div>

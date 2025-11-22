@@ -47,7 +47,7 @@ export default function BackgroundToggle({ onBackgroundChange, onThemeChange }: 
     <div className="fixed bottom-6 right-6 z-50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 bg-charcoal/80 backdrop-blur-md border border-electric/30 rounded-full flex items-center justify-center text-electric hover:bg-charcoal transition-all duration-120 ease-[cubic-bezier(.2,.9,.2,1)] active:scale-95"
+        className="w-12 h-12 bg-charcoal/80 backdrop-blur-md border border-electric/50 rounded-full flex items-center justify-center text-electric hover:bg-charcoal transition-all duration-120 ease-[cubic-bezier(.2,.9,.2,1)] active:scale-95"
         aria-label="Toggle settings"
         aria-expanded={isOpen}
       >
@@ -55,7 +55,7 @@ export default function BackgroundToggle({ onBackgroundChange, onThemeChange }: 
       </button>
       
       {isOpen && (
-        <div className="absolute bottom-16 right-0 bg-charcoal/95 backdrop-blur-md border border-electric/30 rounded-lg p-4 space-y-3 min-w-[180px] shadow-xl">
+        <div className="absolute bottom-16 right-0 bg-charcoal/95 backdrop-blur-md border border-electric/50 rounded-lg p-4 space-y-3 min-w-[180px] shadow-xl">
           <button
             onClick={toggleBackground}
             className="w-full text-left px-3 py-2 text-sm text-offwhite hover:bg-electric/10 rounded transition-all duration-120 ease-[cubic-bezier(.2,.9,.2,1)] active:scale-95"

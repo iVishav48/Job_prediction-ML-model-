@@ -103,7 +103,7 @@ export default function Home() {
         >
           <motion.div 
             style={{ y, opacity, scale }}
-            className="relative rounded-2xl overflow-hidden border border-electric/20 bg-charcoal/60 backdrop-blur-sm group cursor-pointer"
+            className="relative rounded-2xl overflow-hidden border border-electric/40 bg-charcoal/60 backdrop-blur-sm group cursor-pointer"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3, ease: [0.2, 0.9, 0.2, 1] }}
           >
@@ -162,7 +162,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1], delay: index * 0.05 }}
-              className="bg-charcoal/60 backdrop-blur-sm border border-electric/20 rounded-xl p-6 hover:border-electric/40 transition-all duration-120 ease-snap hover:scale-105 active:scale-95"
+              className="bg-charcoal/60 backdrop-blur-sm border border-electric/40 rounded-xl p-6 hover:border-electric/60 transition-all duration-120 ease-snap hover:scale-105 active:scale-95"
             >
               <h3 className="text-xl font-semibold mb-2 text-electric">{feature.title}</h3>
               <p className="text-steel">{feature.description}</p>
@@ -173,7 +173,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="container mx-auto px-4 py-20">
-        <div className="bg-gradient-to-br from-electric/10 to-blue-600/10 rounded-2xl p-12 border border-electric/20">
+        <div className="bg-gradient-to-br from-electric/10 to-blue-600/10 rounded-2xl p-12 border border-electric/40">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Model Performance</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => (

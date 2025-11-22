@@ -1,8 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import ThemeToggle from './ThemeToggle'
 
 // SVG Icon Components
 const HomeIcon = () => (
@@ -25,6 +27,22 @@ const ContactIcon = () => (
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const navRef = useRef<HTMLDivElement>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  
+  // Motion values for pill animation
+  const pillX = useMotionValue(0)
+  const pillWidth = useMotionValue(0)
+  const pillScale = useMotionValue(1)
+  const pillOpacity = useMotionValue(0)
+  
+  // Spring animations
+  const springConfig = { damping: 30, stiffness: 400 }
+  const animatedX = useSpring(pillX, springConfig)
+  const animatedWidth = useSpring(pillWidth, springConfig)
+  const animatedScale = useSpring(pillScale, springConfig)
+  const animatedOpacity = useSpring(pillOpacity, springConfig)
 
   const navItems = [
     { href: '/', label: 'Home', icon: <HomeIcon /> },
@@ -32,39 +50,93 @@ export default function Header() {
     { href: '/contact', label: 'Contact', icon: <ContactIcon /> },
   ]
 
+  // Get active index based on current pathname
+  const getActiveIndex = () => {
+    const index = navItems.findIndex(item => item.href === pathname)
+    return index >= 0 ? index : 0
+  }
+  
+  const activeIndex = getActiveIndex()
+  
+  // Update pill position when active index or hovered index changes
+  useEffect(() => {
+    if (navRef.current) {
+      const navItems = navRef.current.querySelectorAll('[data-nav-item]')
+      const targetIndex = hoveredIndex !== null ? hoveredIndex : activeIndex
+      const targetItem = navItems[targetIndex] as HTMLElement
+      
+      if (targetItem) {
+        const rect = targetItem.getBoundingClientRect()
+        const containerRect = navRef.current.getBoundingClientRect()
+        
+        pillX.set(rect.left - containerRect.left)
+        pillWidth.set(rect.width)
+        pillScale.set(hoveredIndex !== null ? 1.05 : 1)
+        pillOpacity.set(hoveredIndex !== null ? 1 : 0)
+      }
+    }
+  }, [activeIndex, hoveredIndex, pillX, pillWidth, pillScale, pillOpacity])
+
   return (
     <header className="sticky top-0 z-50 pt-6">
       <nav className="container mx-auto px-8">
-        <div className="bg-charcoal/95 backdrop-blur-md border border-electric/20 rounded-2xl shadow-2xl shadow-electric/10 hover:shadow-electric/20 transition-all duration-300">
+        <div className="bg-charcoal/95 backdrop-blur-md border border-electric/40 rounded-2xl shadow-2xl shadow-electric/10 hover:shadow-electric/20 transition-all duration-300">
         <div className="flex items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center space-x-2 group">
             <span className="text-2xl md:text-3xl font-bold gradient-text">JobPredictor</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.div
-                key={item.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
-              >
-                <Link
-                  href={item.href}
-                  className="flex items-center space-x-2 text-steel hover:text-electric transition-all duration-120 ease-snap font-medium active:scale-95 group"
+          {/* Right side controls */}
+          <div className="flex items-center space-x-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex relative" ref={navRef}>
+            {/* Pill Background */}
+            <motion.div
+              className="absolute top-0 h-full bg-electric/20 rounded-lg border border-electric/40 backdrop-blur-sm"
+              style={{
+                x: animatedX,
+                width: animatedWidth,
+                scale: animatedScale,
+                opacity: animatedOpacity,
+              }}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+            />
+            
+            {/* Nav Items */}
+            <div className="flex items-center space-x-8 relative z-10">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  data-nav-item
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)}
                 >
-                  <motion.span
-                    className="transition-transform duration-300 group-hover:rotate-12"
-                    whileHover={{ scale: 1.2 }}
+                  <Link
+                    href={item.href}
+                    className={`flex items-center space-x-2 px-4 py-2 font-medium transition-all duration-120 ease-snap active:scale-95 group ${
+                      index === activeIndex 
+                        ? 'text-electric' 
+                        : 'text-steel hover:text-electric'
+                    }`}
                   >
-                    {item.icon}
-                  </motion.span>
-                  <span>{item.label}</span>
-                </Link>
-              </motion.div>
-            ))}
+                    <motion.span
+                      className="transition-transform duration-300 group-hover:rotate-12"
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      {item.icon}
+                    </motion.span>
+                    <span>{item.label}</span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {/* Mobile Menu Button */}
           <button
@@ -74,7 +146,7 @@ export default function Header() {
           >
             {isMenuOpen ? 'Close' : 'Menu'}
           </button>
-        </div>
+          </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
@@ -85,6 +157,10 @@ export default function Header() {
             transition={{ duration: 0.12, ease: [0.2, 0.9, 0.2, 1] }}
             className="md:hidden px-6 pb-4 space-y-4"
           >
+            <div className="flex items-center justify-between">
+              <span className="text-steel font-medium">Theme</span>
+              <ThemeToggle />
+            </div>
             {navItems.map((item) => (
               <motion.div
                 key={item.href}
@@ -109,6 +185,7 @@ export default function Header() {
             ))}
           </motion.div>
         )}
+        </div>
         </div>
       </nav>
     </header>
