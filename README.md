@@ -84,41 +84,6 @@ python -m http.server 8080
 
 Predict applicant selection based on input features.
 
-**Request Body:**
-```json
-{
-  "Companies": "Google",
-  "Job_Title": "Software Developer",
-  "Educational_Degree": "B.Tech",
-  "Experience_Years": 5.0,
-  "Number_of_Skills": 4
-}
-```
-
-**Response:**
-```json
-{
-  "prediction": 1,
-  "probability": 0.85,
-  "message": "✅ Likely to be Selected",
-  "input": {
-    "Companies": "Google",
-    "Job_Title": "Software Developer",
-    "Educational_Degree": "B.Tech",
-    "Experience_Years": 5.0,
-    "Number_of_Skills": 4
-  }
-}
-```
-
-### GET `/health`
-
-Health check endpoint to verify API and model status.
-
-### GET `/`
-
-API information and available endpoints.
-
 ## 🎯 Features
 
 - **Backend API**: FastAPI-based REST API with automatic documentation

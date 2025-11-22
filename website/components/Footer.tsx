@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal border-t border-electric/20 mt-20">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-xl font-bold gradient-text">JobPredictor</span>
             </div>
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="md:text-left text-center">
             <h3 className="text-electric font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -41,31 +41,7 @@ export default function Footer() {
           </div>
 
           {/* Resources */}
-          <div>
-            <h3 className="text-electric font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a 
-                  href="https://github.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  className="text-steel hover:text-electric transition-colors duration-120 ease-snap text-sm active:scale-95"
-                >
-                  Documentation
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
+         </div>
         <div className="border-t border-electric/20 mt-8 pt-8 text-center text-steel text-sm">
           <p>&copy; {currentYear} JobPredictor. All rights reserved.</p>
         </div>
